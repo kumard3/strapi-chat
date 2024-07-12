@@ -55,6 +55,7 @@ export function ChatLayout({
   }, [getAllUsers]);
 
   const startChat = (user: User) => {
+    console.log(user, "user");
     setSelectedUser(user);
   };
 

@@ -90,8 +90,8 @@ export function Sidebar({
                         variant: selectedUser ? "grey" : "ghost",
                         size: "icon",
                       }),
-                      "h-11 w-11 md:h-16 md:w-16 border-b",
-                      selectedUser &&
+                      "h-11 w-11 border-b md:h-16 md:w-16",
+                      selectedUser?.id === link.id &&
                         "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white",
                     )}
                   >
@@ -129,7 +129,7 @@ export function Sidebar({
                   variant: selectedUser ? "grey" : "ghost",
                   size: "xl",
                 }),
-                selectedUser &&
+                selectedUser?.id === link.id &&
                   "shrink dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white",
                 "justify-start gap-4",
               )}
