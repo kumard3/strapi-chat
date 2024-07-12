@@ -16,14 +16,15 @@ interface ChatProps {
 }
 
 interface Message {
+  id: number;
   attributes: {
-    user: string;
+    user: null | string;
     message: string;
-    sender: string;
-    receiver: string;
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
+    sender: string;
+    receiver: string;
   };
 }
 

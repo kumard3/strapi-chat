@@ -21,10 +21,14 @@ import {
 } from "@/components/ui/form";
 import { toast } from "sonner";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 type CreateUserFrom = RouterInputs["user"]["createUser"];
 
 export default function LoginForm() {
   const router = useRouter();
+  const session = useSession();
+
   const { mutate } = api.user.createUser.useMutation({
     onSuccess() {
       toast.success("Account created successfully", {
@@ -50,6 +54,12 @@ export default function LoginForm() {
   function onSubmit(values: CreateUserFrom) {
     mutate(values);
   }
+
+  useEffect(() => {
+    if (session?.status === "authenticated") {
+      void router.push("/");
+    }
+  }, [router, session]);
   return (
     <div className="flex h-screen items-center justify-center">
       <Card className="mx-auto max-w-sm">
