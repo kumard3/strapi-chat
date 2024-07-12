@@ -29,17 +29,14 @@ export default {
             sender: data.senderId.toString(),
             receiver: data.receiverId.toString(),
             message: data.message,
+            user:data.senderName
           },
         };
         var axios = require("axios");
         await axios
           .post("http://localhost:1337/api/messages", strapiData) // Storing the messages in Strapi
           .then((e) => {
-            io.to(data.roomId).emit("message", {
-              // Sending the message to the room
-              user: data.senderName,
-              text: data.message,
-            });
+            io.to(data.roomId).emit("message",  e.data.data); // Emitting the message to the frontend
           })
           .catch((e) => console.log("error", e.message));
       });
