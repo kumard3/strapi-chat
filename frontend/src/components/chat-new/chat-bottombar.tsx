@@ -18,15 +18,9 @@ interface ChatBottombarProps {
   sendMessage: () => void;
   setNewMessage: React.Dispatch<React.SetStateAction<string>>;
   isMobile: boolean;
+  newMessage: string;
 }
 
-interface ChatListProps {
-  messages?: Message[];
-  selectedUser: string;
-  selectedUserId: string;
-  sendMessage: (newMessage: Message) => void;
-  isMobile: boolean;
-}
 interface Message {
   attributes: {
     sender: string;
@@ -39,6 +33,7 @@ export const BottombarIcons = [{ icon: FileImage }, { icon: Paperclip }];
 export default function ChatBottombar({
   sendMessage,
   isMobile,
+  newMessage,
   setNewMessage,
 }: ChatBottombarProps) {
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -67,7 +62,7 @@ export default function ChatBottombar({
         >
           <Textarea
             autoComplete="off"
-            // value={message}
+            value={newMessage}
             ref={inputRef}
             onChange={handleInputChange}
             name="message"

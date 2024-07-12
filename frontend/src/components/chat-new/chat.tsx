@@ -83,6 +83,7 @@ export function Chat({
             sendMessage={sendMessage}
             isMobile={isMobile}
             setNewMessage={setNewMessage}
+            newMessage={newMessage}
           />
         </>
       )}

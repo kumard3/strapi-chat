@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 interface ChatListProps {
   messages?: Message[];
   selectedUser: string;
+  newMessage: string;
   selectedUserId: string;
   sendMessage: () => void;
   setNewMessage: React.Dispatch<React.SetStateAction<string>>;
@@ -26,6 +27,7 @@ export function ChatList({
   isMobile,
   selectedUserId,
   setNewMessage,
+  newMessage,
 }: ChatListProps) {
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
@@ -92,6 +94,7 @@ export function ChatList({
         setNewMessage={setNewMessage}
         sendMessage={sendMessage}
         isMobile={isMobile}
+        newMessage={newMessage}
       />
     </div>
   );
