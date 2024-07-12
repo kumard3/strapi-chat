@@ -17,8 +17,13 @@ interface ChatProps {
 
 interface Message {
   attributes: {
-    sender: string;
+    user: string;
     message: string;
+    sender: string;
+    receiver: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
   };
 }
 
@@ -68,7 +73,6 @@ export function Chat({
 
   return (
     <div className="flex h-full w-full flex-col justify-between">
-     
       {!selectedUser && (
         <div className="flex h-full items-center justify-center">
           <p className="text-center"> please select a user to chat</p>
@@ -93,4 +97,3 @@ export function Chat({
     </div>
   );
 }
-

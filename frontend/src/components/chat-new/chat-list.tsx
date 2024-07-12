@@ -17,8 +17,13 @@ interface ChatListProps {
 }
 interface Message {
   attributes: {
-    sender: string;
+    user: string;
     message: string;
+    sender: string;
+    receiver: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
   };
 }
 
@@ -78,7 +83,9 @@ export function ChatList({
               <div className="flex items-center gap-3">
                 {message.attributes.sender === selectedUserId && (
                   <Avatar className="flex items-center justify-center">
-                    <AvatarFallback>{message.attributes.sender}</AvatarFallback>
+                    <AvatarFallback>
+                      {message.attributes.user.charAt(0)}
+                    </AvatarFallback>
                   </Avatar>
                 )}
                 <span className="max-w-xs rounded-md bg-accent p-3">
@@ -86,7 +93,9 @@ export function ChatList({
                 </span>
                 {message.attributes.sender !== selectedUserId && (
                   <Avatar className="flex items-center justify-center">
-                    <AvatarFallback>{message.attributes.sender}</AvatarFallback>
+                    <AvatarFallback>
+                      {message.attributes.user.charAt(0)}
+                    </AvatarFallback>{" "}
                   </Avatar>
                 )}
               </div>
