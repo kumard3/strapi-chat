@@ -19,12 +19,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 type CreateUserFrom = {
   email: string;
   password: string;
 };
 export default function LoginForm() {
+  const router = useRouter();
+  const session = useSession();
   const form = useForm<CreateUserFrom>({
     defaultValues: {
       email: "",
@@ -37,9 +41,13 @@ export default function LoginForm() {
       password: values.password,
     });
   }
+  useEffect(() => {
+    if (session?.status === "authenticated") {
+      void router.push("/");
+    }
+  }, [router, session]);
   return (
     <div className="flex h-screen items-center justify-center">
-      {" "}
       <Card className="mx-auto max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>

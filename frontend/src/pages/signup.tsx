@@ -42,7 +42,6 @@ export default function LoginForm() {
   });
 
   const form = useForm<CreateUserFrom>({
-    // resolver: zodResolver(createUserForm),
     defaultValues: {
       email: "",
       password: "",
