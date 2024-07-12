@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { signOut } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 interface SidebarProps {
   isCollapsed: boolean;
@@ -34,6 +35,7 @@ export function Sidebar({
   startChat,
   selectedUser,
 }: SidebarProps) {
+
   return (
     <div
       data-collapsed={isCollapsed}
