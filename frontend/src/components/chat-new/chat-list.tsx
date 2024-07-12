@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import ChatBottombar from "./chat-bottombar";
 import { AnimatePresence, motion } from "framer-motion";
+import { Skeleton } from "../ui/skeleton";
 
 interface ChatListProps {
   messages?: Message[];
@@ -12,6 +13,7 @@ interface ChatListProps {
   sendMessage: () => void;
   setNewMessage: React.Dispatch<React.SetStateAction<string>>;
   isMobile: boolean;
+  isLoading: boolean;
 }
 interface Message {
   attributes: {
@@ -28,6 +30,7 @@ export function ChatList({
   selectedUserId,
   setNewMessage,
   newMessage,
+  isLoading,
 }: ChatListProps) {
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
@@ -40,6 +43,7 @@ export function ChatList({
 
   return (
     <div className="flex h-full w-full flex-col overflow-y-auto overflow-x-hidden">
+      {isLoading && <ChatLoadingUI />}
       <div
         ref={messagesContainerRef}
         className="flex h-full w-full flex-col overflow-y-auto overflow-x-hidden"
@@ -99,3 +103,25 @@ export function ChatList({
     </div>
   );
 }
+
+const ChatMessageLoadingSkeleton = () => (
+  <div className="flex items-start gap-4 p-2">
+    <Skeleton className="flex h-10 w-10 items-center justify-center">
+      <Avatar className="flex items-center justify-center">
+        <div className="h-10 w-10 rounded-full bg-gray-300"></div>
+      </Avatar>
+    </Skeleton>
+    <div className="flex flex-col gap-2">
+      <Skeleton className="h-4 w-32 rounded-md bg-gray-300"></Skeleton>
+      <Skeleton className="h-4 w-48 rounded-md bg-gray-300"></Skeleton>
+    </div>
+  </div>
+);
+
+const ChatLoadingUI = () => (
+  <div className="space-y-2">
+    {Array.from({ length: 5 }).map((_, index) => (
+      <ChatMessageLoadingSkeleton key={index} />
+    ))}
+  </div>
+);

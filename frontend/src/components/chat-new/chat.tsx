@@ -3,6 +3,8 @@ import { ChatList } from "./chat-list";
 import React, { useEffect, useState } from "react";
 import { api } from "@/utils/api";
 import useSocket from "@/hook/useScoket";
+import { Skeleton } from "../ui/skeleton";
+import { Avatar } from "../ui/avatar";
 
 interface ChatProps {
   roomId: string;
@@ -31,7 +33,7 @@ export function Chat({
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const socket = useSocket(roomId, username);
-  const { data: getPrevMessage } = api.user.getMessage.useQuery({
+  const { data: getPrevMessage, isLoading } = api.user.getMessage.useQuery({
     userId: userId,
     selectedUserId: selectedUserId,
   });
@@ -45,7 +47,6 @@ export function Chat({
   useEffect(() => {
     if (socket) {
       socket.on("message", (message: Message) => {
-        console.log(message, "message");
         setMessages((prevMessages) => [...prevMessages, message]);
       });
     }
@@ -67,6 +68,7 @@ export function Chat({
 
   return (
     <div className="flex h-full w-full flex-col justify-between">
+     
       {!selectedUser && (
         <div className="flex h-full items-center justify-center">
           <p className="text-center"> please select a user to chat</p>
@@ -84,9 +86,11 @@ export function Chat({
             isMobile={isMobile}
             setNewMessage={setNewMessage}
             newMessage={newMessage}
+            isLoading={isLoading}
           />
         </>
       )}
     </div>
   );
 }
+
