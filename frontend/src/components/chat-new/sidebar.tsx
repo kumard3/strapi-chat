@@ -10,12 +10,14 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { Skeleton } from "../ui/skeleton";
 
 interface SidebarProps {
   isCollapsed: boolean;
   links?: User[];
   startChat: (user: User) => void;
   isMobile: boolean;
+  isLoading: boolean;
   selectedUser: User | null;
 }
 
@@ -34,8 +36,8 @@ export function Sidebar({
   isCollapsed,
   startChat,
   selectedUser,
+  isLoading,
 }: SidebarProps) {
-
   return (
     <div
       data-collapsed={isCollapsed}
@@ -66,6 +68,13 @@ export function Sidebar({
               <SquarePen size={20} />
             </button>
           </div>
+        </div>
+      )}
+      {isLoading && <LoadingUI />}
+
+      {!isLoading && links?.length === 0 && (
+        <div className="flex items-center justify-center gap-4">
+          <p>No chats available</p>
         </div>
       )}
       <nav className="grid h-full gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
@@ -161,3 +170,21 @@ export function Sidebar({
     </div>
   );
 }
+
+const LoadingUI = () => (
+  <nav className="grid h-full gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
+    {Array.from({ length: 5 }).map((_, index) => (
+      <Skeleton key={index} className="flex items-center gap-4">
+        <div className="flex h-11 w-11 items-center justify-center md:h-16 md:w-16">
+          <Avatar className="flex items-center justify-center">
+            <AvatarImage className="h-10 w-10" />
+            <AvatarFallback />
+          </Avatar>
+        </div>
+        <div className="flex max-w-28 flex-col">
+          <span className="h-4 w-3/4 rounded-md bg-gray-300"></span>
+        </div>
+      </Skeleton>
+    ))}
+  </nav>
+);

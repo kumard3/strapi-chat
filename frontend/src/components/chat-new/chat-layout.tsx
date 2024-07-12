@@ -46,7 +46,7 @@ export function ChatLayout({
   const [users, setUsers] = useState<typeof getAllUsers>([]);
   const { data: session } = useSession();
   const currentUser = session?.user;
-  const { data: getAllUsers } = api.user.getAllUsers.useQuery();
+  const { data: getAllUsers, isLoading } = api.user.getAllUsers.useQuery();
 
   useEffect(() => {
     if (getAllUsers) {
@@ -113,6 +113,7 @@ export function ChatLayout({
           isMobile={isMobile}
           startChat={startChat}
           selectedUser={selectedUser}
+          isLoading={isLoading}
         />
       </ResizablePanel>
       <ResizableHandle withHandle />
