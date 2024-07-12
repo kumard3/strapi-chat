@@ -6,17 +6,14 @@ import { ChatLayout } from "@/components/chat-new/chat-layout";
 
 export default function Home() {
   const router = useRouter();
-  const { data: session } = useSession({
+  const {} = useSession({
     required: true,
     onUnauthenticated() {
       void router.push("/login");
     },
   });
-  console.log(session);
   return (
-    <div className="flex h-[calc(100dvh)] flex-col items-center justify-center gap-4 p-4 py-32 md:px-24">
-      {/* <UserList /> */}
-
+    <div className="flex h-[calc(100dvh)] flex-col items-center justify-center gap-4">
       <ChatLayout defaultLayout={[320, 480]} navCollapsedSize={8} />
     </div>
   );

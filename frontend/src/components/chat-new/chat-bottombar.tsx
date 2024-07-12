@@ -1,14 +1,5 @@
-import {
-  FileImage,
-  Mic,
-  Paperclip,
-  PlusCircle,
-  SendHorizontal,
-  Smile,
-  ThumbsUp,
-} from "lucide-react";
-import Link from "next/link";
-import React, { useRef, useState } from "react";
+import { FileImage, Paperclip, SendHorizontal } from "lucide-react";
+import React, { useRef } from "react";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
@@ -19,13 +10,6 @@ interface ChatBottombarProps {
   setNewMessage: React.Dispatch<React.SetStateAction<string>>;
   isMobile: boolean;
   newMessage: string;
-}
-
-interface Message {
-  attributes: {
-    sender: string;
-    message: string;
-  };
 }
 
 export const BottombarIcons = [{ icon: FileImage }, { icon: Paperclip }];

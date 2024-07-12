@@ -1,9 +1,6 @@
-"use client";
-
-import Link from "next/link";
-import { MoreHorizontal, SquarePen } from "lucide-react";
+import { LogOut, MoreHorizontal, SquarePen } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
@@ -11,6 +8,7 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { signOut } from "next-auth/react";
 
 interface SidebarProps {
   isCollapsed: boolean;
@@ -39,7 +37,7 @@ export function Sidebar({
   return (
     <div
       data-collapsed={isCollapsed}
-      className="group relative flex h-full flex-col gap-4 p-2 data-[collapsed=true]:p-2"
+      className="group relative flex h-full flex-col justify-between gap-4 p-2 data-[collapsed=true]:p-2"
     >
       {!isCollapsed && (
         <div className="flex items-center justify-between p-2">
@@ -68,7 +66,7 @@ export function Sidebar({
           </div>
         </div>
       )}
-      <nav className="grid gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
+      <nav className="grid h-full gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
         {links?.map((link, index) =>
           isCollapsed ? (
             <TooltipProvider key={index}>
@@ -144,6 +142,20 @@ export function Sidebar({
           ),
         )}
       </nav>
+
+      <div className="">
+        <Button
+          className="w-full"
+          onClick={() => {
+            void signOut({
+              callbackUrl: "/login",
+            });
+          }}
+        >
+          <LogOut size={24} />
+          <span>Logout</span>
+        </Button>
+      </div>
     </div>
   );
 }
