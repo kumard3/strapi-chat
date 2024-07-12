@@ -77,7 +77,7 @@ export function Sidebar({
           <p>No chats available</p>
         </div>
       )}
-      <nav className="grid h-full gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
+      <nav className="flex h-full flex-col gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
         {links?.map((link, index) =>
           isCollapsed ? (
             <TooltipProvider key={index}>
@@ -90,7 +90,7 @@ export function Sidebar({
                         variant: selectedUser ? "grey" : "ghost",
                         size: "icon",
                       }),
-                      "h-11 w-11 md:h-16 md:w-16",
+                      "h-11 w-11 md:h-16 md:w-16 border-b",
                       selectedUser &&
                         "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white",
                     )}
