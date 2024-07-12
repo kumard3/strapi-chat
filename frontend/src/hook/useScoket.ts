@@ -5,7 +5,7 @@ const useSocket = (roomId: string, username: string): Socket | null => {
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
-    const SERVER_URL = "http://localhost:1337";
+    const SERVER_URL = "https://strapi-dashboard.kumard3.in";
 
     // connect the socket
     const socket = io(SERVER_URL);
