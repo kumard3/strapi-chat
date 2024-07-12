@@ -15,12 +15,7 @@ export default {
       socket.on("join", ({ username, roomId }) => {
         if (username && roomId) {
           socket.join(roomId); // Adding the user to the specified room
-          socket.emit("welcome", {
-            // Sending a welcome message to the user
-            user: "bot",
-            text: `${username}, Welcome to the private chat room`,
-            userData: username,
-          });
+          console.log(`${username} joined room: ${roomId}`);
         } else {
           console.log("An error occurred");
         }
@@ -31,7 +26,8 @@ export default {
         let strapiData = {
           // Generating the message data to be stored in Strapi
           data: {
-            user: data.user,
+            sender: data.senderId.toString(),
+            receiver: data.receiverId.toString(),
             message: data.message,
           },
         };
@@ -41,7 +37,7 @@ export default {
           .then((e) => {
             io.to(data.roomId).emit("message", {
               // Sending the message to the room
-              user: data.username,
+              user: data.senderName,
               text: data.message,
             });
           })

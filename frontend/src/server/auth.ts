@@ -47,7 +47,7 @@ export const authOptions: NextAuthOptions = {
         const { email, password } = loginUserSchema.parse(credentials);
         // Fetch the user from the database based on the provided username
         const users = await fetch(
-          `${env.SERVER_URL}/api/tests??filters[email][$eq]=${email}`,
+          `${env.SERVER_URL}/api/accounts?filters[email][$eq]=${email}`,
           {
             method: "GET",
 

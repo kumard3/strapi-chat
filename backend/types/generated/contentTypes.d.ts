@@ -804,7 +804,7 @@ export interface ApiAccountAccount extends Schema.CollectionType {
     email: Attribute.Email;
     token: Attribute.String;
     userId: Attribute.UID<'api::account.account', 'username'>;
-    password: Attribute.Password;
+    password: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -829,6 +829,7 @@ export interface ApiMessageMessage extends Schema.CollectionType {
     singularName: 'message';
     pluralName: 'messages';
     displayName: 'message';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -836,6 +837,8 @@ export interface ApiMessageMessage extends Schema.CollectionType {
   attributes: {
     user: Attribute.String;
     message: Attribute.String;
+    sender: Attribute.String;
+    receiver: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
