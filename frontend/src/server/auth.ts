@@ -53,7 +53,7 @@ export const authOptions: NextAuthOptions = {
 
             headers: {
               "Content-Type": "application/json",
-              Authorization: env.SERVER_AUTHTOKEN,
+              Authorization: `${env.SERVER_AUTHTOKEN}`,
             },
           },
         );
@@ -73,6 +73,12 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: "/signup",
+    signOut: "/login",
+    error: "/login",
+    verifyRequest: "/login",
+  },
 };
 
 export const getServerAuthSession = (ctx: {

@@ -5,7 +5,6 @@ import { signIn, useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 export default function Test() {
-  const { mutate } = api.post.create.useMutation();
   const session = useSession();
   console.log(session);
   // URL to your strapi instance
@@ -86,17 +85,7 @@ export default function Test() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col">
-      <button
-        onClick={() => {
-          mutate({
-            email: "kuamr@xamtac.com",
-            password: "password",
-          });
-        }}
-      >
-        Create User
-      </button>
+    <div className="flex h-full w-full flex-col">
       <button
         onClick={() => {
           void signIn("credentials", {
@@ -110,8 +99,8 @@ export default function Test() {
       </button>
       {JSON.stringify(messages)}
 
-      <input onChange={handleChange} ></input>
-      <button onClick={handleClick} >handleClick</button>
+      <input onChange={handleChange}></input>
+      <button onClick={handleClick}>handleClick</button>
     </div>
   );
 }
