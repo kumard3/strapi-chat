@@ -1,31 +1,33 @@
 {
   "name": "my-strapi-project",
-  "private": true,
   "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
   "scripts": {
+    "build": "strapi build",
+    "deploy": "strapi deploy",
     "develop": "strapi develop",
     "start": "strapi start",
-    "build": "strapi build",
-    "strapi": "strapi",
-    "deploy": "strapi deploy"
+    "strapi": "strapi"
   },
   "dependencies": {
     "@strapi/plugin-cloud": "4.25.3",
     "@strapi/plugin-i18n": "4.25.3",
     "@strapi/plugin-users-permissions": "4.25.3",
     "@strapi/strapi": "4.25.3",
+    "axios": "^1.7.2",
     "pg": "8.8.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "5.3.4",
+    "socket.io": "^4.7.5",
     "styled-components": "5.3.3"
-  },
-  "strapi": {
-    "uuid": "045a50d0-969d-4602-9a62-77392cbca447"
   },
   "engines": {
     "node": ">=18.0.0 <=20.x.x",
     "npm": ">=6.0.0"
   },
-  "license": "MIT"
+  "strapi": {
+    "uuid": "045a50d0-969d-4602-9a62-77392cbca447"
+  }
 }
