@@ -4,7 +4,7 @@ export default {
     let io = require("socket.io")(strapi.server.httpServer, {
       cors: {
         // cors setup
-        origin: "http://localhost:3000",
+        origin: "https://next-chat.kumard3.com",
         methods: ["GET", "POST"],
         credentials: true,
       },
