@@ -8,6 +8,7 @@ import {
 import bcrypt from "bcryptjs";
 import { TRPCClientError } from "@trpc/client";
 import { env } from "@/env";
+import axios from "axios";
 
 export const createUserForm = z.object({
   email: z.string().email(),
@@ -83,13 +84,6 @@ export const userRouter = createTRPCRouter({
 
       const res = await fetch(
         `${env.SERVER_URL}/api/messages?filters[$or][0][sender][$eq]=${userId}&filters[$or][0][receiver][$eq]=${selectedUserId}&filters[$or][1][sender][$eq]=${selectedUserId}&filters[$or][1][receiver][$eq]=${userId}&pagination[pageSize]=100&pagination[page]=1`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${env.SERVER_AUTHTOKEN}`,
-          },
-        },
       );
       const data = (await res.json()) as messageType;
 
@@ -117,6 +111,9 @@ interface userType {
     };
   };
 }
+
+// /api/messages?filters[$or][0][sender][$eq]=3&filters[$or][1][date][$eq]=2020-01-02&filters[author][name][$eq]=Kai%20doe
+// filters[sender][$eq]=2&filters[receiver][$eq]=3[$or]
 
 interface messageType {
   data: {
